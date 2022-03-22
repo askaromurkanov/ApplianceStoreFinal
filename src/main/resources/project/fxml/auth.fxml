@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="center" hgap="10" stylesheets="../css/style.css" vgap="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.controllers.authController">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #263e94" stylesheets="@../css/style.css">
+         <children>
+            <AnchorPane layoutX="380.0" prefHeight="500.0" prefWidth="420.0" style="-fx-background-color: #fafafa">
+               <children>
+                  <TextField fx:id="usernameFiled" layoutX="101.0" layoutY="180.0" prefHeight="31.0" prefWidth="218.0" promptText="Username" style="-fx-border-color: #263e94; -fx-border-radius: 7; -fx-background-color: #fafafa;">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField fx:id="passwordField" layoutX="101.0" layoutY="233.0" prefHeight="26.0" prefWidth="218.0" promptText="Password" style="-fx-background-color: #fafafa; -fx-border-radius: 7; -fx-border-color: #263e94;" styleClass=".input">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </PasswordField>
+                  <Label layoutX="126.0" layoutY="123.0" text="Authorization" textFill="#263e94">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Button id="signInButton" fx:id="signInButton" alignment="BOTTOM_LEFT" contentDisplay="RIGHT" layoutX="144.0" layoutY="321.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="124.0" stylesheets="../css/style.css" text="Sign in " textFill="#fafafa">
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="26.0" layoutX="237.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/login-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Button>
+                  <Button id="signUpButton" fx:id="signUpButton" alignment="BOTTOM_LEFT" contentDisplay="RIGHT" layoutX="301.0" layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: #263e94;" text="Sign up" textFill="#fafafa">
+                     <graphic>
+                        <ImageView fitHeight="34.0" fitWidth="20.0" layoutX="372.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/edit-2-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="invalidMessage" layoutX="85.0" layoutY="271.0" prefHeight="20.0" prefWidth="250.0" text="Invalid username or password. Please try again" textFill="RED" />
+                  <ImageView fitHeight="70.0" fitWidth="91.0" layoutX="159.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logowhite.PNG" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Label alignment="CENTER" layoutX="26.0" layoutY="108.0" text="Home Appliances" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="41.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="120.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/washing-machine.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>

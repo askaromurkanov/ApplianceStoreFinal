@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="staffPane" prefHeight="700.0" prefWidth="895.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.controllers.employeesController">
+   <children>
+      <TableView fx:id="tableEmployees" layoutX="10.0" layoutY="281.0" onMouseClicked="#getSelected" prefHeight="412.0" prefWidth="875.0">
+         <columns>
+            <TableColumn fx:id="id_col" prefWidth="42.399993896484375" style="-fx-alignment: center;" text="ID" />
+            <TableColumn fx:id="name_col" prefWidth="86.4000244140625" style="-fx-alignment: center;" text="NAME" />
+            <TableColumn fx:id="surname_col" prefWidth="118.39999389648438" text="SURNAME" />
+            <TableColumn fx:id="address_col" prefWidth="145.5999755859375" style="-fx-alignment: center;" text="ADDRESS" />
+            <TableColumn fx:id="birthdate_col" prefWidth="108.7999267578125" text="BRITHDATE" />
+            <TableColumn fx:id="position_col" prefWidth="107.99993896484375" text="POSITION" />
+            <TableColumn fx:id="salary_col" prefWidth="77.5999755859375" text="SALARY" />
+            <TableColumn fx:id="username_col" prefWidth="97.5999755859375" text="USERNAME" />
+            <TableColumn fx:id="password_col" prefWidth="88.60003662109375" text="PASSWORD" />
+         </columns>
+      </TableView>
+      <ImageView fx:id="avatarImg" fitHeight="170.0" fitWidth="168.0" layoutX="25.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/staff/defaultavatar.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="photoButton" layoutX="58.0" layoutY="219.0" onAction="#UpdateAvatar" prefHeight="33.0" prefWidth="104.0" styleClass="photoButton" text="PHOTO" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <VBox layoutX="220.0" layoutY="30.0" prefHeight="189.0" prefWidth="218.0">
+         <children>
+            <HBox prefHeight="80.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="71.0" text="NAME:" textFill="#263e94">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameField" prefHeight="28.0" prefWidth="145.0" promptText="NAME" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="80.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="74.0" text="SURNAME:" textFill="#263e94">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="surnameField" prefHeight="28.0" prefWidth="145.0" promptText="SURNAME" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="29.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="74.0" text="ADDRESS:" textFill="#263e94">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="addressField" prefHeight="28.0" prefWidth="145.0" promptText="34, Maldybaeva" styleClass="textfield" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="458.0" layoutY="30.0" prefHeight="189.0" prefWidth="241.0">
+         <children>
+            <HBox prefHeight="80.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="180.0" text="BIRTHDATE:" textFill="#263e94">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="birthdateField" prefHeight="28.0" prefWidth="258.0" promptText="2021-01-01" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="80.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="74.0" text="POSITION:" textFill="#263e94">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="positionFiled" prefHeight="28.0" prefWidth="171.0" promptText="POSITION" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="29.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="74.0" text="SALARY:" textFill="#263e94">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="salaryField" prefHeight="28.0" prefWidth="169.0" promptText="30000.00" styleClass="textfield" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <JFXButton fx:id="updateButton" layoutX="764.0" layoutY="96.0" onAction="#update" prefHeight="37.0" prefWidth="104.0" styleClass="updateButton" text="UPDATE" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="deleteButton" layoutX="764.0" layoutY="163.0" onAction="#delete" prefHeight="37.0" prefWidth="104.0" styleClass="deleteButton" text="DELETE" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <HBox layoutX="586.0" layoutY="238.0" prefHeight="40.0" prefWidth="242.0">
+         <children>
+            <TextField fx:id="searchField" prefHeight="40.0" prefWidth="202.0" promptText="Search" style="-fx-border-color: #3C62E8; -fx-background-color: #ffffff;" />
+            <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/search.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <JFXButton fx:id="exportButton1" contentDisplay="GRAPHIC_ONLY" layoutX="836.0" layoutY="238.0" prefHeight="40.0" prefWidth="45.0" styleClass="exportButton" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/export.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+   </children>
+</Pane>

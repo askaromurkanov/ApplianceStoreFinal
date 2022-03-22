@@ -1,0 +1,78 @@
+.sidebarButton{
+    -fx-background-color:#263e94;
+}
+.sidebarButton:hover{
+    -fx-background-color: #21398c;
+}
+
+.photoButton{
+    -fx-background-color: #7B48E8;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+}
+.photoButton:hover{
+    -fx-background-color: #683dcb;
+}
+
+.table-view .column-header{
+    -fx-background-color: #3C62E8;
+
+}
+.table-view{
+    -fx-font-size: 13px;
+}
+.table-view .column-header .label{
+    -fx-text-fill: #ffffff;
+}
+.avatarImg{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-padding: 10;
+    -fx-background-color: black;
+    -fx-background-radius: 5;
+    -fx-border-radius: 100;
+}
+.textfield{
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent transparent #263e94 transparent;
+    -fx-border-width:0 0 2 0;
+    -fx-text-fill:#263e94;
+    -fx-font-size: 14px;
+}
+.updateButton{
+    -fx-background-color:  #218429;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+}
+.updateButton:hover{
+    -fx-background-color: #27c53d;
+}
+.deleteButton{
+    -fx-background-color:#c52516;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+}
+.deleteButton:hover{
+    -fx-background-color: #ff4545;
+}
+.exportButton{
+    -fx-background-color: #1e7a48;
+    /*-fx-border-radius: 11;*/
+    /*-fx-background-radius: 11;*/
+}
+.exportButton:hover{
+    -fx-background-color: #249154;
+}
+.textarea{
+    -fx-background-color: #ffffff;
+    -fx-border-color:  #263e94;
+    -fx-border-width:0 0 2 0;
+    -fx-text-fill:#263e94;
+    -fx-font-size: 14px;
+}
+
+#signInButton{
+    -fx-background-color:#263e94;
+}
+#signInButton:hover{
+    -fx-background-color: #203685;
+}

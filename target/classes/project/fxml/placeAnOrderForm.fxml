@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="productsPane" prefHeight="700.0" prefWidth="895.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.controllers.PlaceAnOrderFormController">
+   <children>
+      <TableView fx:id="tableProducts" layoutX="14.0" layoutY="57.0" onMouseClicked="#getSelected" prefHeight="424.0" prefWidth="636.0">
+         <columns>
+            <TableColumn fx:id="id_col" prefWidth="33.600006103515625" style="-fx-alignment: center;" text="ID" />
+            <TableColumn fx:id="name_col" prefWidth="126.39999008178711" style="-fx-alignment: center;" text="NAME" />
+            <TableColumn fx:id="model_col" prefWidth="146.40000915527344" text="MODEL" />
+            <TableColumn fx:id="quantity_col" prefWidth="92.0" text="QUANTITY" />
+            <TableColumn fx:id="price_col" prefWidth="116.0" text="PRICE" />
+            <TableColumn fx:id="discount_col" prefWidth="119.20001220703125" text="DISCOUNT" />
+         </columns>
+      </TableView>
+      <ImageView fx:id="avatarAppliance" fitHeight="170.0" fitWidth="168.0" layoutX="700.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" styleClass="avatarImg">
+         <image>
+            <Image url="@../images/electrical-appliance.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="671.0" layoutY="233.0" prefHeight="235.0" prefWidth="210.0">
+         <children>
+            <HBox prefHeight="50.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="78.0" text="NAME:" textFill="#3c62e8">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameField" prefHeight="28.0" prefWidth="130.0" promptText="NAME" style="-fx-border-color: #3C62E8;" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="78.0" text="MODEL:" textFill="#3c62e8">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="modelField" prefHeight="28.0" prefWidth="130.0" promptText="MODEL" style="-fx-border-color: #3C62E8;" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="211.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="81.0" text="QUANTITY:" textFill="#3c62e8">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="quantityField" prefHeight="31.0" prefWidth="125.0" promptText="10" style="-fx-border-color: #3C62E8;" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="210.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="81.0" text="PRICE:" textFill="#3c62e8">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="priceField" prefHeight="28.0" prefWidth="125.0" promptText="30000.00" style="-fx-border-color: #3C62E8;" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="34.0" prefWidth="242.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="81.0" text="DISCOUNT:" textFill="#3c62e8">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="discountField" prefHeight="28.0" prefWidth="125.0" promptText="50" style="-fx-border-color: #3C62E8;" styleClass="textfield" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="242.0">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/search.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="searchField" prefHeight="40.0" prefWidth="202.0" promptText="Search" style="-fx-border-color: #3C62E8; -fx-background-color: #FFFFFF;" />
+         </children>
+      </HBox>
+      <Label layoutX="14.0" layoutY="488.0" prefHeight="40.0" prefWidth="287.0" text="Personal data of the customer:" textFill="#262a76">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <VBox layoutX="14.0" layoutY="530.0" prefHeight="152.0" prefWidth="297.0">
+         <children>
+            <HBox prefHeight="60.0" prefWidth="296.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="120.0" text="FULL NAME:" textFill="#262a76">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameCustomerField" prefHeight="31.0" prefWidth="175.0" promptText="John Jones" style="-fx-border-color: #262a76;" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="32.0" prefWidth="310.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="120.0" text="PHONE NUMBER:" textFill="#262a76">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="phonenumberField" prefHeight="31.0" prefWidth="175.0" promptText="0500555700" style="-fx-border-color: #262a76;" styleClass="textfield" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="332.0" layoutY="530.0" prefHeight="152.0" prefWidth="297.0">
+         <children>
+            <HBox prefHeight="60.0" prefWidth="296.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="120.0" text="MAIL:" textFill="#262a76">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="mailField" prefHeight="31.0" prefWidth="175.0" promptText="mail@gmai.com" style="-fx-border-color: #262a76;" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="60.0" prefWidth="334.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="120.0" text="ADDRESS:" textFill="#262a76">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="addressField" prefHeight="31.0" prefWidth="175.0" promptText="34, Maldybaeva" style="-fx-border-color: #262a76;" styleClass="textfield" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox layoutX="650.0" layoutY="536.0" prefHeight="33.0" prefWidth="234.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="95.0" text="QUANTITY:" textFill="#218429">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="quantityorderField" prefHeight="31.0" prefWidth="83.0" promptText="0" style="-fx-border-color: #218429; -fx-text-fill: #218429;" styleClass="textfield" text="0" />
+            <JFXButton fx:id="plusButton" prefHeight="24.0" prefWidth="31.0" style="-fx-background-color: #218429;" text="+" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="minusButton" prefHeight="31.0" prefWidth="35.0" style="-fx-background-color: #c41c1c;" text="-" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+      <JFXButton fx:id="completeOrderButton" layoutX="671.0" layoutY="606.0" onAction="#placeorder" prefHeight="37.0" prefWidth="104.0" styleClass="updateButton" text="COMPLETE" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="cleanButton" layoutX="784.0" layoutY="606.0" onAction="#clean" prefHeight="37.0" prefWidth="104.0" styleClass="deleteButton" text="CLEAN" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+   </children>
+</Pane>

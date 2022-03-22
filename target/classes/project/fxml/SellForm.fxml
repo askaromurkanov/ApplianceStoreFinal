@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="productsPane" prefHeight="700.0" prefWidth="895.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.controllers.SellFormController">
+   <children>
+      <HBox layoutX="10.0" layoutY="22.0" prefHeight="40.0" prefWidth="242.0">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/search.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="searchField" prefHeight="40.0" prefWidth="202.0" promptText="Search" style="-fx-border-color: #3C62E8; -fx-background-color: #FFFFFF;" />
+         </children>
+      </HBox>
+      <JFXButton fx:id="exportButton1" contentDisplay="GRAPHIC_ONLY" layoutX="259.0" layoutY="22.0" prefHeight="40.0" prefWidth="45.0" styleClass="exportButton" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/export.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <TableView fx:id="tableProducts" layoutX="10.0" layoutY="75.0" onMouseClicked="#getSelected" prefHeight="532.0" prefWidth="875.0">
+         <columns>
+            <TableColumn fx:id="id_col" prefWidth="33.600006103515625" style="-fx-alignment: center;" text="ID" />
+            <TableColumn fx:id="name_col" prefWidth="126.39999008178711" style="-fx-alignment: center;" text="NAME" />
+            <TableColumn fx:id="model_col" prefWidth="146.40000915527344" text="MODEL" />
+            <TableColumn fx:id="factory_col" prefWidth="142.4000244140625" style="-fx-alignment: center;" text="FACTORY" />
+            <TableColumn fx:id="category_col" prefWidth="142.4000244140625" text="CATEGORY" />
+            <TableColumn fx:id="year_col" prefWidth="68.7999267578125" text="YEAR" />
+            <TableColumn fx:id="quantity_col" prefWidth="80.7999267578125" text="QUANTITY" />
+            <TableColumn fx:id="price_col" prefWidth="57.5999755859375" text="PRICE" />
+            <TableColumn fx:id="discount_col" prefWidth="79.199951171875" text="DISCOUNT" />
+         </columns>
+      </TableView>
+      <HBox layoutX="531.0" layoutY="630.0" prefHeight="32.0" prefWidth="194.0">
+         <children>
+            <Label fx:id="totalLabel" prefHeight="38.0" prefWidth="127.0" text="Enter the quantity:" textFill="#263e94">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="quantityField" prefHeight="26.0" prefWidth="67.0" styleClass="textfield" />
+         </children>
+      </HBox>
+      <JFXButton fx:id="sellButton" layoutX="747.0" layoutY="627.0" onAction="#sell" prefHeight="37.0" prefWidth="104.0" styleClass="updateButton" text="SELL" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+   </children>
+</Pane>

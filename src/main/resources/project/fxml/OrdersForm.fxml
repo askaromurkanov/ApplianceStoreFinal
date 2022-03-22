@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="addProductsPane" prefHeight="700.0" prefWidth="895.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.controllers.OrdersFormController">
+   <children>
+      <TableView fx:id="tableOrders" layoutX="10.0" layoutY="65.0" onMouseClicked="#get" prefHeight="550.0" prefWidth="875.0">
+         <columns>
+            <TableColumn fx:id="id_col" prefWidth="33.600006103515625" style="-fx-alignment: center;" text="ID" />
+            <TableColumn fx:id="product_id_col" prefWidth="83.19997787475586" style="-fx-alignment: center;" text="PRODUCT ID" />
+            <TableColumn fx:id="product_col" prefWidth="99.20004272460938" text="PRODUCT" />
+            <TableColumn fx:id="customer_name" prefWidth="121.5999755859375" text="CUSTOMER NAME" />
+            <TableColumn fx:id="addressCol" prefWidth="125.59991455078125" style="-fx-alignment: center;" text="ADDRESS" />
+            <TableColumn fx:id="mail_col" prefWidth="92.80000305175781" text="MAIL" />
+            <TableColumn fx:id="phonenumber_col" prefWidth="114.39996337890625" text="PHONE NUMBER" />
+            <TableColumn fx:id="quantity_col" prefWidth="71.9998779296875" text="QUANTITY" />
+            <TableColumn fx:id="order_time_col" prefWidth="136.0001220703125" text="ORDER TIME" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="deliverButton" layoutX="760.0" layoutY="633.0" onAction="#deliver" prefHeight="37.0" prefWidth="104.0" styleClass="updateButton" text="DELIVER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <HBox layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="242.0">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/search.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="searchField" prefHeight="40.0" prefWidth="202.0" promptText="Search" style="-fx-border-color: #3C62E8; -fx-background-color: #FFFFFF;" />
+         </children>
+      </HBox>
+      <JFXButton fx:id="exportButton1" contentDisplay="GRAPHIC_ONLY" layoutX="263.0" layoutY="14.0" prefHeight="40.0" prefWidth="45.0" styleClass="exportButton" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/export.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <HBox layoutX="543.0" layoutY="636.0" prefHeight="32.0" prefWidth="194.0">
+         <children>
+            <Label fx:id="totalLabel" prefHeight="38.0" prefWidth="127.0" text="Enter the quantity:" textFill="#263e94">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="quantityField" prefHeight="26.0" prefWidth="67.0" styleClass="textfield" />
+         </children>
+      </HBox>
+   </children>
+</Pane>

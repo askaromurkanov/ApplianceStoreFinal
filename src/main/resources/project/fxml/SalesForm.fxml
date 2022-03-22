@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="productsPane" prefHeight="700.0" prefWidth="895.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.controllers.SalesFormController">
+   <children>
+      <TableView fx:id="tableSales" layoutX="10.0" layoutY="66.0" prefHeight="566.0" prefWidth="875.0">
+         <columns>
+            <TableColumn fx:id="id_col" prefWidth="33.600006103515625" style="-fx-alignment: center;" text="ID" />
+            <TableColumn fx:id="product_col" prefWidth="144.79998397827148" style="-fx-alignment: center;" text="PRODUCT" />
+            <TableColumn fx:id="client_col" prefWidth="101.5999755859375" text="CLIENT NAME" />
+            <TableColumn fx:id="employee_col" prefWidth="124.79998779296875" style="-fx-alignment: center;" text="EMPLOYEE ID" />
+            <TableColumn fx:id="delivery_col" prefWidth="110.39996337890625" text="DELIVERY" />
+            <TableColumn fx:id="quantity_col" prefWidth="93.60003662109375" text="QUANTITY" />
+            <TableColumn fx:id="totalprice_col" prefWidth="117.60009765625" text="TOTAL PRICE" />
+            <TableColumn fx:id="saletime_col" prefWidth="147.2000732421875" text="SALE TIME" />
+         </columns>
+      </TableView>
+      <HBox layoutX="10.0" layoutY="22.0" prefHeight="40.0" prefWidth="242.0">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/search.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="searchField" prefHeight="40.0" prefWidth="202.0" promptText="Search" style="-fx-border-color: #3C62E8; -fx-background-color: #FFFFFF;" />
+         </children>
+      </HBox>
+      <JFXButton fx:id="exportButton1" contentDisplay="GRAPHIC_ONLY" layoutX="259.0" layoutY="22.0" onAction="#ExportToExcel" prefHeight="40.0" prefWidth="45.0" styleClass="exportButton" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/export.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <Label fx:id="totalLabel" layoutX="25" layoutY="647.0" prefHeight="30.0" prefWidth="422.0" text="TOTAL EARNINGS:" textFill="#169c2d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalquantityLabel" layoutX="560.0" layoutY="647.0" prefHeight="30.0" prefWidth="299.0" text="TOTAL QUANTITY SALES:" textFill="#21699c">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

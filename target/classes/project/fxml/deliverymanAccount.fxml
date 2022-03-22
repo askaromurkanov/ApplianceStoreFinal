@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.controllers.deliverymanAccount">
+   <children>
+      <VBox prefHeight="700.0" prefWidth="205.0" style="-fx-background-color: #263e94;">
+         <children>
+            <Pane prefHeight="12.0" prefWidth="206.0" />
+            <ImageView fitHeight="150.0" fitWidth="205.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="206.0" text="TECHNO" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold" size="26.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="34.0" prefWidth="206.0" />
+            <JFXButton fx:id="mainButton" onAction="#btnMain" prefHeight="55.0" prefWidth="205.0" styleClass="sidebarButton" text="MAIN" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="orderButton" onAction="#btnOrders" prefHeight="55.0" prefWidth="205.0" styleClass="sidebarButton" text="ORDERS" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="inprogressButton" alignment="CENTER" contentDisplay="RIGHT" onAction="#btnInprogress" prefHeight="55.0" prefWidth="205.0" styleClass="sidebarButton" text="IN PROGRESS" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <graphic>
+                  <Circle fx:id="notification" fill="WHITE" radius="7.0" stroke="WHITE" strokeType="INSIDE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="mydeliveriesButton" onAction="#btnMyDeliveries" prefHeight="55.0" prefWidth="205.0" styleClass="sidebarButton" text="MY DELIVERIES" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <Pane prefHeight="183.0" prefWidth="206.0" />
+            <JFXButton fx:id="signOutButton" onAction="#btnSignOut" prefHeight="64.0" prefWidth="205.0" styleClass="sidebarButton" text="SIGN OUT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </VBox>
+      <AnchorPane fx:id="context" layoutX="206.0" prefHeight="700.0" prefWidth="895.0" style="-fx-background-color: #ffffff;" />
+   </children>
+</AnchorPane>

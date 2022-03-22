@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="customersPane" prefHeight="700.0" prefWidth="895.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.controllers.CustomersFormController">
+   <children>
+      <TableView fx:id="tableCustomers" layoutX="10.0" layoutY="281.0" onMouseClicked="#getSelected" prefHeight="412.0" prefWidth="875.0">
+         <columns>
+            <TableColumn fx:id="id_col" prefWidth="42.399993896484375" style="-fx-alignment: center;" text="ID" />
+            <TableColumn fx:id="name_col" prefWidth="103.99999618530273" style="-fx-alignment: center;" text="NAME" />
+            <TableColumn fx:id="surname_col" prefWidth="111.99995422363281" text="SURNAME" />
+            <TableColumn fx:id="mail_col" prefWidth="117.5999755859375" style="-fx-alignment: center;" text="MAIL" />
+            <TableColumn fx:id="phonenumber_col" prefWidth="110.4000244140625" text="PHONE NUMBER" />
+            <TableColumn fx:id="address_col" prefWidth="105.60003662109375" text="ADDRESS" />
+            <TableColumn fx:id="purchases_col" prefWidth="94.39996337890625" text="PURCHASES" />
+            <TableColumn fx:id="username_col" prefWidth="102.4000244140625" text="USERNAME" />
+            <TableColumn fx:id="password_col" prefWidth="83.79998779296875" text="PASSWORD" />
+         </columns>
+      </TableView>
+      <ImageView fx:id="avatarImg" fitHeight="170.0" fitWidth="168.0" layoutX="25.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/staff/defaultavatar.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="photoButton" layoutX="58.0" layoutY="219.0" prefHeight="33.0" prefWidth="104.0" styleClass="photoButton" text="PHOTO" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <VBox layoutX="220.0" layoutY="30.0" prefHeight="189.0" prefWidth="218.0">
+         <children>
+            <HBox prefHeight="80.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="71.0" text="NAME:" textFill="#263e94">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameField" prefHeight="28.0" prefWidth="145.0" promptText="NAME" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="80.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="74.0" text="SURNAME:" textFill="#263e94">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="surnameField" prefHeight="28.0" prefWidth="145.0" promptText="SURNAME" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="29.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="74.0" text="ADDRESS:" textFill="#263e94">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="addressField" prefHeight="28.0" prefWidth="145.0" promptText="34 ,Maldybaeva" styleClass="textfield" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="459.0" layoutY="30.0" prefHeight="189.0" prefWidth="241.0">
+         <children>
+            <HBox prefHeight="80.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="99.0" text="MAIL:" textFill="#263e94">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="mailField" prefHeight="31.0" prefWidth="164.0" promptText="mail@gmail.com" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="80.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="99.0" text="PURCHASES:" textFill="#263e94">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="purchaseField" prefHeight="28.0" prefWidth="171.0" promptText="10" styleClass="textfield" />
+               </children>
+            </HBox>
+            <HBox prefHeight="29.0" prefWidth="218.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="166.0" text="PHONE NUMBER:" textFill="#263e94">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="phonenumberField" prefHeight="28.0" prefWidth="171.0" promptText="0700550055" styleClass="textfield" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <JFXButton fx:id="deleteButton" layoutX="755.0" layoutY="162.0" onAction="#delete" prefHeight="37.0" prefWidth="104.0" styleClass="deleteButton" text="DELETE" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <HBox layoutX="586.0" layoutY="238.0" prefHeight="40.0" prefWidth="242.0">
+         <children>
+            <TextField fx:id="searchField" prefHeight="40.0" prefWidth="202.0" promptText="Search" style="-fx-border-color: #3C62E8; -fx-background-color: #ffffff;" />
+            <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/search.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <JFXButton fx:id="exportButton1" contentDisplay="GRAPHIC_ONLY" layoutX="836.0" layoutY="238.0" prefHeight="40.0" prefWidth="45.0" styleClass="exportButton" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/export.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+   </children>
+</Pane>
