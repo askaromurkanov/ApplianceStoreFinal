@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 public class Order {
     private int order_id;
@@ -127,10 +128,13 @@ public class Order {
     public static ObservableList<Order> dataForTable(){
         ObservableList<Order> oblist = FXCollections.observableArrayList();
         Connection conn = MySQL.DBConnect();
+
         try {
             assert conn != null;
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT orders.*,(SELECT CONCAT(product.name, ' ', product.model) FROM product WHERE product.product_id = orders.product_id) AS product FROM orders WHERE quantity > 0");
+            ResultSet rs = stmt.executeQuery("SELECT orders.*,(SELECT CONCAT(products.appliance, ' ', products.model) " +
+                    "FROM products WHERE products.product_id = orders.product_id) AS product " +
+                    "FROM orders WHERE month > 2 AND year = 2022 LIMIT 1000");
             while (rs.next()) {
                 oblist.add(new Order(rs.getInt("order_id"),
                         rs.getInt("product_id"),
@@ -140,7 +144,46 @@ public class Order {
                         rs.getString("mail"),
                         rs.getInt("phonenumber"),
                         rs.getInt("quantity"),
-                        rs.getString("order_time")));
+                        rs.getString("order_date")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return oblist;
+    }
+
+    public static ObservableList<Order> dataForDeliveryMan(){
+        ObservableList<Order> oblist = FXCollections.observableArrayList();
+        Connection conn = MySQL.DBConnect();
+
+        LocalDate todayDate = LocalDate.now();
+        String today = String.valueOf(todayDate);
+
+        try {
+            assert conn != null;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT orders.*,(SELECT CONCAT(products.appliance, ' ', products.model) " +
+                    "FROM products WHERE products.product_id = orders.product_id) AS product " +
+                    "FROM orders WHERE order_date = '"+today+"' AND active = 1 " +
+                    "ORDER BY order_date DESC " +
+                    "LIMIT 300");
+            while (rs.next()) {
+                oblist.add(new Order(rs.getInt("order_id"),
+                        rs.getInt("product_id"),
+                        rs.getString("product"),
+                        rs.getString("customer_name"),
+                        rs.getString("address"),
+                        rs.getString("mail"),
+                        rs.getInt("phonenumber"),
+                        rs.getInt("quantity"),
+                        rs.getString("order_date")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -34,7 +34,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class MySQL {
-    private static final String DATABASE_URL = "jdbc:mysql://localhost/techno?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost/technotest2?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String DATABASE_USERNAME = "root";
     private static final String DATABASE_PASSWORD = "root";
 

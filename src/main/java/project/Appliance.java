@@ -4,6 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Appliance {
     private int id;
@@ -28,6 +32,15 @@ public class Appliance {
         this.price = price;
         this.discount = discount;
         this.description = description;
+    }
+
+    public Appliance(int id, String name, String model, String factory, String category, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.model = model;
+        this.factory = factory;
+        this.category = category;
+        this.quantity = quantity;
     }
 
     public int getId() {
@@ -131,12 +144,15 @@ public class Appliance {
         try {
             assert conn != null;
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM product");
+            ResultSet rs = stmt.executeQuery("SELECT product_id, appliance, model, manufacturers.manufacturer, categories.category," +
+                    " year, quantity, price, discount, description " +
+                    "FROM products JOIN manufacturers ON products.manufacturer_id = manufacturers.id " +
+                    "JOIN categories ON products.category_id = categories.id");
             while (rs.next()) {
                 oblist.add(new Appliance(rs.getInt("product_id"),
-                        rs.getString("name"),
+                        rs.getString("appliance"),
                         rs.getString("model"),
-                        rs.getString("factory"),
+                        rs.getString("manufacturer"),
                         rs.getString("category"),
                         rs.getInt("year"),
                         rs.getInt("quantity"),
@@ -163,7 +179,7 @@ public class Appliance {
         String description = "Great Appliance";
         try {
             PreparedStatement ps;
-            String sql_check = "SELECT description FROM product WHERE product_id = ?";
+            String sql_check = "SELECT description FROM products WHERE product_id = ?";
             ps = conn.prepareStatement(sql_check);
             ps.setInt(1, ID);
             ResultSet rs = ps.executeQuery();
@@ -191,7 +207,7 @@ public class Appliance {
         try {
             assert conn != null;
             PreparedStatement ps;
-            String sql_insert = "DELETE FROM product WHERE product_id = "+id;
+            String sql_insert = "DELETE FROM products WHERE product_id = "+id;
             ps = conn.prepareStatement(sql_insert);
             ps.execute();
         } catch (SQLException e) {
@@ -202,7 +218,7 @@ public class Appliance {
         Connection conn = MySQL.DBConnect();
         PreparedStatement ps = null;
         try {
-            ps=conn.prepareStatement("UPDATE product SET image = ? WHERE product_id = "+ID);
+            ps=conn.prepareStatement("UPDATE products SET image = ? WHERE product_id = "+ID);
             ps.setString(1,imgPath);
             ps.execute();
         } catch (SQLException e) {
@@ -221,7 +237,7 @@ public class Appliance {
         String imgPath = "D:\\Учеба\\Курсавуха\\src\\project\\images\\product\\electrical-appliance.png";
         try {
             PreparedStatement ps;
-            String sql = "SELECT image FROM product WHERE product_id = ?";
+            String sql = "SELECT image FROM products WHERE product_id = ?";
             assert conn != null;
             ps = conn.prepareStatement(sql);
             ps.setInt(1, ID);
@@ -243,5 +259,205 @@ public class Appliance {
             }
         }
         return imgPath;
+    }
+
+
+
+    public static ObservableList<Appliance> getDataForReport(String table, String column){
+        ObservableList<Appliance> oblist = FXCollections.observableArrayList();
+        Connection conn = MySQL.DBConnect();
+
+        LocalDate todayDate = LocalDate.now();
+        LocalDate yesterday = todayDate.minusDays(1);
+        String strYesterday = String.valueOf(yesterday);
+
+        String sql = "SELECT "+table+".product_id, products.appliance, products.model, categories.category, " +
+                "manufacturers.manufacturer, SUM("+table+".quantity) AS quantity " +
+                "FROM "+table+" JOIN products ON "+table+".product_id = products.product_id " +
+                "JOIN categories ON products.category_id = categories.id " +
+                "JOIN manufacturers ON products.manufacturer_id = manufacturers.id " +
+                "WHERE "+table+"." + column+"= '"+strYesterday+"' "+
+                "GROUP BY "+table+".product_id " +
+                "ORDER BY quantity DESC LIMIT 50";
+        try {
+            assert conn != null;
+
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                oblist.add(new Appliance(rs.getInt("product_id"),
+                        rs.getString("appliance"),
+                        rs.getString("model"),
+                        rs.getString("manufacturer"),
+                        rs.getString("category"),
+                        rs.getInt("quantity")));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return oblist;
+    }
+
+    public static ObservableList<Appliance> getDataForReport(String table, String date_column, String day){
+        ObservableList<Appliance> oblist = FXCollections.observableArrayList();
+        Connection conn = MySQL.DBConnect();
+
+        String sql = "SELECT "+table+".product_id, products.appliance, products.model, categories.category, " +
+                "manufacturers.manufacturer, SUM("+table+".quantity) AS quantity " +
+                "FROM "+table+" JOIN products ON "+table+".product_id = products.product_id " +
+                "JOIN categories ON products.category_id = categories.id " +
+                "JOIN manufacturers ON products.manufacturer_id = manufacturers.id " +
+                "WHERE "+table+"."+date_column+" = ?"+
+                "GROUP BY "+table+".product_id " +
+                "ORDER BY quantity DESC LIMIT 15";
+        try {
+            assert conn != null;
+
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, day);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                oblist.add(new Appliance(rs.getInt("product_id"),
+                        rs.getString("appliance"),
+                        rs.getString("model"),
+                        rs.getString("manufacturer"),
+                        rs.getString("category"),
+                        rs.getInt("quantity")));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return oblist;
+    }
+
+    public static ObservableList<Appliance> getDataForReport(String table, int month, int year){
+        ObservableList<Appliance> oblist = FXCollections.observableArrayList();
+        Connection conn = MySQL.DBConnect();
+
+
+        String sql = "SELECT "+table+".product_id, products.appliance, products.model, categories.category, " +
+                "manufacturers.manufacturer, SUM("+table+".quantity) AS quantity " +
+                "FROM "+table+" JOIN products ON "+table+".product_id = products.product_id " +
+                "JOIN categories ON products.category_id = categories.id " +
+                "JOIN manufacturers ON products.manufacturer_id = manufacturers.id " +
+                "WHERE "+table+".month = ? AND "+table+".year = ? " +
+                "GROUP BY "+table+".product_id " +
+                "ORDER BY quantity DESC LIMIT 15";
+        try {
+            assert conn != null;
+
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, month);
+            ps.setInt(2, year);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                oblist.add(new Appliance(rs.getInt("product_id"),
+                        rs.getString("appliance"),
+                        rs.getString("model"),
+                        rs.getString("manufacturer"),
+                        rs.getString("category"),
+                        rs.getInt("quantity")));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return oblist;
+    }
+
+    public static ObservableList<Appliance> getDataForReport(String table, int year){
+        ObservableList<Appliance> oblist = FXCollections.observableArrayList();
+        Connection conn = MySQL.DBConnect();
+
+
+        String sql = "SELECT "+table+".product_id, products.appliance, products.model, categories.category, " +
+                "manufacturers.manufacturer, SUM("+table+".quantity) AS quantity " +
+                "FROM "+table+" JOIN products ON "+table+".product_id = products.product_id " +
+                "JOIN categories ON products.category_id = categories.id " +
+                "JOIN manufacturers ON products.manufacturer_id = manufacturers.id " +
+                "WHERE "+table+".year = ? " +
+                "GROUP BY "+table+".product_id " +
+                "ORDER BY quantity DESC LIMIT 15";
+        try {
+            assert conn != null;
+
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, year);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                oblist.add(new Appliance(rs.getInt("product_id"),
+                        rs.getString("appliance"),
+                        rs.getString("model"),
+                        rs.getString("manufacturer"),
+                        rs.getString("category"),
+                        rs.getInt("quantity")));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return oblist;
+    }
+
+    public static ObservableList<Integer> getDateValues(String type, String table){
+        ObservableList<Integer> oblist = FXCollections.observableArrayList();
+        Connection conn = MySQL.DBConnect();
+        try {
+            assert conn != null;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT DISTINCT "+type+" FROM "+table+" ORDER BY "+type);
+            while (rs.next()) {
+                oblist.add(rs.getInt(1));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return oblist;
     }
 }

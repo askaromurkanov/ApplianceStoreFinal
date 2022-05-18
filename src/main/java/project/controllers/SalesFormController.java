@@ -65,7 +65,7 @@ public class SalesFormController {
     @FXML
     private TableColumn<Sale, Integer> delivery_col;
     @FXML
-    private TableColumn<Sale, Integer> employee_col;
+    private TableColumn<Sale, String> employee_col;
     @FXML
     private TableColumn<Sale, Double> totalprice_col;
     @FXML
@@ -73,10 +73,6 @@ public class SalesFormController {
 
     @FXML
     void initialize() {
-        totalLabel.setText("TOTAL EARNINGS: "+Sale.getTotalEarnings()+"       ");
-        totalLabel.setVisible(true);
-        totalquantityLabel.setText("TOTAL QUANTITY OF SALES: "+Sale.getTotalQuantity());
-        totalquantityLabel.setVisible(true);
         table();
         search();
     }
@@ -85,7 +81,7 @@ public class SalesFormController {
         id_col.setCellValueFactory(new PropertyValueFactory<>("sale_id"));
         product_col.setCellValueFactory(new PropertyValueFactory<>("product"));
         client_col.setCellValueFactory(new PropertyValueFactory<>("customer_name"));
-        employee_col.setCellValueFactory(new PropertyValueFactory<>("employee_id"));
+        employee_col.setCellValueFactory(new PropertyValueFactory<>("employee_name"));
         delivery_col.setCellValueFactory(new PropertyValueFactory<>("delivery"));
         quantity_col.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         totalprice_col.setCellValueFactory(new PropertyValueFactory<>("total_price"));
@@ -99,7 +95,7 @@ public class SalesFormController {
         id_col.setCellValueFactory(new PropertyValueFactory<>("sale_id"));
         product_col.setCellValueFactory(new PropertyValueFactory<>("product"));
         client_col.setCellValueFactory(new PropertyValueFactory<>("customer_name"));
-        employee_col.setCellValueFactory(new PropertyValueFactory<>("employee_id"));
+        employee_col.setCellValueFactory(new PropertyValueFactory<>("employee_name"));
         delivery_col.setCellValueFactory(new PropertyValueFactory<>("delivery"));
         quantity_col.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         totalprice_col.setCellValueFactory(new PropertyValueFactory<>("total_price"));
@@ -120,7 +116,8 @@ public class SalesFormController {
                     return true;
                 } else if (sale.getStringValueOfID().contains(lowerCaseFilter)) {
                     return true;
-                }else if (sale.getStringValurOfEmployeeID().toLowerCase().contains(lowerCaseFilter)) {
+                }
+                else if (sale.getEmployee_name().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }else if (sale.getSale_time().contains(lowerCaseFilter)){
                     return true;
@@ -142,7 +139,9 @@ public class SalesFormController {
         try {
             assert conn != null;
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT sales.*,(SELECT CONCAT(product.name, ' ', product.model) FROM product WHERE product.product_id = sales.product_id) AS product FROM sales");
+            ResultSet rs = stmt.executeQuery("SELECT sales.*,(SELECT CONCAT(products.appliance, ' ', products.model) FROM products " +
+                    "WHERE products.product_id = sales.product_id) AS products (SELECT CONCAT(employees.name, ' ', employees.surname) FROM employees " +
+                    "WHERE employees.id = sales.employee_id) AS employee_name  FROM sales");
 
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet sheet = workbook.createSheet("Sales");
@@ -150,7 +149,7 @@ public class SalesFormController {
             header.createCell(0).setCellValue("ID");
             header.createCell(1).setCellValue("PRODUCT");
             header.createCell(2).setCellValue("CLIENT NAME");
-            header.createCell(3).setCellValue("EMPLOYEE ID");
+            header.createCell(3).setCellValue("EMPLOYEE NAME");
             header.createCell(4).setCellValue("DELIVERY");
             header.createCell(5).setCellValue("QUANTITY");
             header.createCell(6).setCellValue("TOTAL PRICE");
@@ -163,7 +162,7 @@ public class SalesFormController {
                 row.createCell(0).setCellValue(rs.getInt("sale_id"));
                 row.createCell(1).setCellValue(rs.getString("product"));
                 row.createCell(2).setCellValue(rs.getString("customer_name"));
-                row.createCell(3).setCellValue(rs.getInt("employee_id"));
+                row.createCell(3).setCellValue(rs.getInt("employee_name"));
                 row.createCell(4).setCellValue(rs.getInt("delivery"));
                 row.createCell(5).setCellValue(rs.getInt("quantity"));
                 row.createCell(6).setCellValue(rs.getDouble("total_price"));

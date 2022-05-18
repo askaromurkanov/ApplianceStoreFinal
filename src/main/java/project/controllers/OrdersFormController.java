@@ -82,7 +82,7 @@ public class OrdersFormController {
     }
 
     void table(){
-        ObservableList<Order> oblist = Order.dataForTable();
+        ObservableList<Order> oblist = Order.dataForDeliveryMan();
         id_col.setCellValueFactory(new PropertyValueFactory<>("order_id"));
         product_col.setCellValueFactory(new PropertyValueFactory<>("product"));
         product_id_col.setCellValueFactory(new PropertyValueFactory<>("product_id"));
@@ -96,7 +96,7 @@ public class OrdersFormController {
         tableOrders.setItems(oblist);
     }
     void search(){
-        ObservableList<Order> oblist = Order.dataForTable();
+        ObservableList<Order> oblist = Order.dataForDeliveryMan();
         id_col.setCellValueFactory(new PropertyValueFactory<>("order_id"));
         product_col.setCellValueFactory(new PropertyValueFactory<>("product"));
         product_id_col.setCellValueFactory(new PropertyValueFactory<>("product_id"));
@@ -179,9 +179,6 @@ public class OrdersFormController {
         int index = get();
         int order_id = id_col.getCellData(index);
         int product_id = product_id_col.getCellData(index);
-        String mail = String.valueOf(mail_col.getCellData(index));
-        String address = addressCol.getCellData(index);
-        String order_time = order_time_col.getCellData(index);
 
 //        double price = 0;
 
@@ -208,23 +205,20 @@ public class OrdersFormController {
 
         try {
             PreparedStatement ps;
-            String sql_insert = "INSERT INTO `deliveryinprogress`(`order_id`, `product_id`, `address`, `quantity`, `order_time`) VALUES (?,?,?,?,?)";
+            String sql_insert = "INSERT INTO `deliveryinprogress`(`order_id`, `product_id`, `employee_id`) VALUES (?,?,?)";
             assert conn != null;
 
             ps = conn.prepareStatement(sql_insert);
             ps.setInt(1,order_id);
             ps.setInt(2,product_id);
-            ps.setString(3,address);
-            ps.setInt(4,quantity);
-            ps.setString(5,order_time);
+            ps.setInt(3,authController.id);
             ps.execute();
 
-            int newQuantity = recentQuantity - quantity;
-
-            String sql_update = ("UPDATE orders SET quantity = ? WHERE product_id = "+product_id);
-            ps=conn.prepareStatement(sql_update);
-            ps.setInt(1, newQuantity);
+            String sql_update = "UPDATE orders SET active = 0 WHERE order_id="+order_id;
+            ps = conn.prepareStatement(sql_update);
             ps.execute();
+
+
 
 
 

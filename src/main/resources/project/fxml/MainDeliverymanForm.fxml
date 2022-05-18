@@ -74,7 +74,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="deliveriesButton" contentDisplay="TOP" layoutY="32.0" prefHeight="168.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #259291; -fx-border-width: 8;" text="Button" textFill="#010b00">
+                  <JFXButton fx:id="deliveriesButton" contentDisplay="TOP" layoutY="32.0" prefHeight="168.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #259291; -fx-border-width: 8;" text="deliveryman" textFill="#010b00">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>
@@ -95,7 +95,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="salaryButton" alignment="CENTER" contentDisplay="TOP" layoutY="32.0" prefHeight="168.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #3CB44B; -fx-border-width: 8;" text="Button" textFill="#010b00">
+                  <JFXButton fx:id="salaryButton" alignment="CENTER" contentDisplay="TOP" layoutY="32.0" prefHeight="168.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #3CB44B; -fx-border-width: 8;" text="worker" textFill="#010b00">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>

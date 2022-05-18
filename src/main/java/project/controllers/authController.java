@@ -65,7 +65,7 @@ public class authController {
 
             Connection conn = MySQL.DBConnect();
             PreparedStatement ps;
-            String sql = "SELECT id, name, surname, position, username, password FROM employees WHERE username = ? AND password =? ";
+            String sql = "SELECT employees.id, name, surname, position, username, password FROM employees JOIN positions ON employees.position_id = positions.id WHERE username = ? AND password =? ";
             try {
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, username);

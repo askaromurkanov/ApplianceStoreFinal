@@ -192,6 +192,7 @@ CREATE TABLE `sales` (
 -- Dumping data for table `sales`
 --
 
+--Ina!*12345
 INSERT INTO `sales` (`sale_id`, `product_id`, `order_id`, `customer_name`, `employee_id`, `delivery`, `quantity`, `total_price`, `sale_time`) VALUES
 (1, 114, NULL, 'Guest', 2, 0, 1, 55000.00, '2021-12-28 02:09:05'),
 (3, 113, 2, 'John Jones', 3, 1, 1, 30000.00, '2021-12-28 02:19:25'),

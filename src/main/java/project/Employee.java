@@ -5,11 +5,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.util.Date;
 
 public class Employee extends User{
     private String birthdate;
     private String position;
     private double salary;
+    private int quantity;
 
     public Employee(int id, String name, String surname, String address, String birthdate, String position, Double salary, String username, String password) {
         super(id, name, surname, address, username, password);
@@ -18,6 +20,13 @@ public class Employee extends User{
         this.salary = salary;
     }
 
+    public Employee(int id, String name, String surname, String address, String birthdate, String position, double salary, int quantity) {
+        super(id, name, surname, address);
+        this.birthdate = birthdate;
+        this.position = position;
+        this.salary = salary;
+        this.quantity = quantity;
+    }
 
     public String getBirthdate() {
         return birthdate;
@@ -55,7 +64,7 @@ public class Employee extends User{
             assert conn != null;
             System.out.println("dfdfd");
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM employees");
+            ResultSet rs = stmt.executeQuery("SELECT *, position FROM employees JOIN positions ON employees.position_id = positions.id");
             while (rs.next()) {
                 oblist.add(new Employee(rs.getInt("ID"),
                         rs.getString("name"),
@@ -66,6 +75,58 @@ public class Employee extends User{
                         rs.getDouble("salary"),
                         rs.getString("username"),
                         rs.getString("password")));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return oblist;
+    }
+
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public static ObservableList<Employee> topEmployees(){
+        Date date = new Date();
+
+        int month = date.getMonth();
+        int year = date.getYear()+1990;
+
+        ObservableList<Employee> oblist = FXCollections.observableArrayList();
+        Connection conn = MySQL.DBConnect();
+        try {
+            assert conn != null;
+            System.out.println("dfdfd");
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT employees.id, employees.name, employees.surname, employees.address, " +
+                    "employees.birthdate, positions.position, employees.salary, SUM(sales.quantity) AS quantity " +
+                    "FROM employees " +
+                    "JOIN positions ON employees.position_id = positions.id " +
+                    "JOIN sales ON employees.id = sales.employee_id " +
+                    "WHERE sales.month = 5 AND sales.year = 2022 " +
+                    "GROUP BY employees.id " +
+                    "ORDER BY quantity DESC");
+            while (rs.next()) {
+                oblist.add(new Employee(rs.getInt("ID"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("address"),
+                        rs.getString("birthdate"),
+                        rs.getString("position"),
+                        rs.getDouble("salary"),
+                        rs.getInt("quantity")));
             }
         }catch (SQLException e){
             e.printStackTrace();

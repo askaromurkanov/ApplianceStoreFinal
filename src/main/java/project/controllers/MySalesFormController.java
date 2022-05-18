@@ -73,8 +73,7 @@ public class MySalesFormController {
 
     @FXML
     void initialize() {
-        totalLabel.setText("TOTAL EARNINGS FROM YOUR SALES: "+Sale.getTotalEarningsForEmployee(authController.id));
-        totalLabel.setVisible(true);
+
         totalquantityLabel.setText("TOTAL QUANTITY OF YOUR SALES: "+Sale.getTotalQuantityForEmployee(authController.id));
         totalquantityLabel.setVisible(true);
         table();
@@ -85,7 +84,7 @@ public class MySalesFormController {
         id_col.setCellValueFactory(new PropertyValueFactory<>("sale_id"));
         product_col.setCellValueFactory(new PropertyValueFactory<>("product"));
         client_col.setCellValueFactory(new PropertyValueFactory<>("customer_name"));
-        employee_col.setCellValueFactory(new PropertyValueFactory<>("employee_id"));
+        employee_col.setCellValueFactory(new PropertyValueFactory<>("employee_name"));
         delivery_col.setCellValueFactory(new PropertyValueFactory<>("delivery"));
         quantity_col.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         totalprice_col.setCellValueFactory(new PropertyValueFactory<>("total_price"));
@@ -99,7 +98,7 @@ public class MySalesFormController {
         id_col.setCellValueFactory(new PropertyValueFactory<>("sale_id"));
         product_col.setCellValueFactory(new PropertyValueFactory<>("product"));
         client_col.setCellValueFactory(new PropertyValueFactory<>("customer_name"));
-        employee_col.setCellValueFactory(new PropertyValueFactory<>("employee_id"));
+        employee_col.setCellValueFactory(new PropertyValueFactory<>("employee_name"));
         delivery_col.setCellValueFactory(new PropertyValueFactory<>("delivery"));
         quantity_col.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         totalprice_col.setCellValueFactory(new PropertyValueFactory<>("total_price"));
@@ -120,7 +119,7 @@ public class MySalesFormController {
                     return true;
                 } else if (sale.getStringValueOfID().contains(lowerCaseFilter)) {
                     return true;
-                }else if (sale.getStringValurOfEmployeeID().toLowerCase().contains(lowerCaseFilter)) {
+                }else if (sale.getEmployee_name().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }else if (sale.getSale_time().contains(lowerCaseFilter)){
                     return true;

@@ -40,6 +40,11 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
+            <JFXButton fx:id="topEmployeeButton" onAction="#btnTopEmployees" prefHeight="55.0" prefWidth="205.0" styleClass="sidebarButton" text="TOP EMPLOYEES" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
             <JFXButton fx:id="productsButton" onAction="#btnProducts" prefHeight="55.0" prefWidth="205.0" styleClass="sidebarButton" text="PRODUCTS" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -50,7 +55,17 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
+            <JFXButton fx:id="topProductOrders" onAction="#btnTopProductOrders" prefHeight="55.0" prefWidth="205.0" styleClass="sidebarButton" text="    TOP PRODUCT ORDERS" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
             <JFXButton fx:id="salesButton" onAction="#btnSales" prefHeight="55.0" prefWidth="205.0" styleClass="sidebarButton" text="SALES" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="topProductSales" onAction="#btnTopProductOrders" prefHeight="55.0" prefWidth="205.0" styleClass="sidebarButton" text="    TOP PRODUCT SALES" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

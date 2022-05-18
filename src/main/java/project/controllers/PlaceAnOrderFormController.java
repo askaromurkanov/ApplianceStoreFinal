@@ -239,7 +239,7 @@ public class PlaceAnOrderFormController {
 
 
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         System.out.println(formatter.format(date));
 
@@ -248,7 +248,7 @@ public class PlaceAnOrderFormController {
         Connection conn = project.MySQL.DBConnect();
         try {
             PreparedStatement ps;
-            String sql_insert = "INSERT INTO `orders`(`product_id`, `customer_name`, `phonenumber`, `mail`, `address`, `quantity`, `order_time`) VALUES (?,?,?,?,?,?,?)";
+            String sql_insert = "INSERT INTO `orders`(`product_id`, `customer_name`, `phonenumber`, `mail`, `address`, `quantity`, `order_date`, `active`) VALUES (?,?,?,?,?,?,?,?)";
             assert conn != null;
 
             ps = conn.prepareStatement(sql_insert);
@@ -259,12 +259,13 @@ public class PlaceAnOrderFormController {
             ps.setString(5,address);
             ps.setInt(6,quantity);
             ps.setString(7,order_time);
+            ps.setInt(8,1);
             ps.execute();
 
 
             int newQuantity = recentQuantity - quantity;
 
-            String sql_update = ("UPDATE product SET quantity = ? WHERE product_id = "+product_id);
+            String sql_update = ("UPDATE products SET quantity = ? WHERE product_id = "+product_id);
             ps=conn.prepareStatement(sql_update);
             ps.setInt(1, newQuantity);
             ps.execute();

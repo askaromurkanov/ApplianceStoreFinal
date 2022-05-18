@@ -162,7 +162,7 @@ public class SellFormController {
         return index;
     }
 
-    int recentQuality(){
+    int recentQuantity(){
         int index = -1;
 
         index = tableProducts.getSelectionModel().getSelectedIndex();
@@ -180,12 +180,11 @@ public class SellFormController {
     @FXML
     void sell(){
         int quantity = quantity();
-        int recentQuantity = recentQuality();
+        int recentQuantity = recentQuantity();
         int index = getSelected();
 
         int product_id=id_col.getCellData(index);
         int employee_id=authController.id;
-        String customer_name="Guest";
         int delivery=0;
 
         if (quantity>recentQuantity){
@@ -195,32 +194,30 @@ public class SellFormController {
         double total_price = price_col.getCellData(index)*quantity;
 
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         System.out.println(formatter.format(date));
-
-
         String sale_time = formatter.format(date);
+
         Connection conn = project.MySQL.DBConnect();
         try {
             PreparedStatement ps;
-            String sql_insert = "INSERT INTO sales (`product_id`, `employee_id`, `customer_name`, `delivery`, `quantity`, `total_price`, `sale_time`, `order_id`) VALUES (?,?,?,?,?,?,?,?)";
+            String sql_insert = "INSERT INTO sales (`product_id`, `employee_id`, `isDelivered`, `quantity`, `total_price`, `sale_date`, `order_id`) VALUES (?,?,?,?,?,?,?)";
             assert conn != null;
 
             ps = conn.prepareStatement(sql_insert);
             ps.setInt(1,product_id);
             ps.setInt(2,employee_id);
-            ps.setString(3,customer_name);
-            ps.setInt(4,delivery);
-            ps.setInt(5,quantity);
-            ps.setDouble(6,total_price);
-            ps.setString(7, sale_time);
-            ps.setString(8, null);
+            ps.setInt(3,delivery);
+            ps.setInt(4,quantity);
+            ps.setDouble(5,total_price);
+            ps.setString(6, sale_time);
+            ps.setString(7, null);
             ps.execute();
 
             int newQuantity = recentQuantity - quantity;
 
-            String sql_update = ("UPDATE product SET quantity = ? WHERE product_id = "+product_id);
+            String sql_update = ("UPDATE products SET quantity = ? WHERE product_id = "+product_id);
             ps=conn.prepareStatement(sql_update);
             ps.setInt(1, newQuantity);
             ps.execute();

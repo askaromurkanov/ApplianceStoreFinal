@@ -12,17 +12,16 @@ public class Sale {
     private int sale_id;
     private String product;
     private String customer_name;
-    private int employee_id;
+    private String employee_name;
     private int delivery;
     private int quantity;
     private double total_price;
     private String sale_time;
 
-    public Sale(int sale_id, String product, String customer_name, int employee_id, int delivery, int quantity, double total_price, String sale_time) {
+    public Sale(int sale_id, String product, String employee_name, int delivery, int quantity, double total_price, String sale_time) {
         this.sale_id = sale_id;
         this.product = product;
-        this.customer_name = customer_name;
-        this.employee_id = employee_id;
+        this.employee_name = employee_name;
         this.delivery = delivery;
         this.quantity = quantity;
         this.total_price = total_price;
@@ -42,10 +41,10 @@ public class Sale {
         return sale_id;
     }
 
-    public String getStringValurOfEmployeeID() {
-        String id = String.valueOf(this.employee_id);
-        return id;
-    }
+//    public String getStringValurOfEmployeeID() {
+//        String id = String.valueOf(this.employee_String);
+//        return id;
+//    }
 
     public String getProduct() {
         return product;
@@ -63,12 +62,12 @@ public class Sale {
         this.customer_name = customer_name;
     }
 
-    public int getEmployee_id() {
-        return employee_id;
+    public String getEmployee_name() {
+        return employee_name;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
+    public void setEmployee_name(String employee_name) {
+        this.employee_name = employee_name;
     }
 
     public int getDelivery() {
@@ -122,16 +121,20 @@ public class Sale {
         try {
             assert conn != null;
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT sales.*,(SELECT CONCAT(product.name, ' ', product.model) FROM product WHERE product.product_id = sales.product_id) AS product FROM sales");
+            ResultSet rs = stmt.executeQuery("SELECT sales.*,(SELECT CONCAT(products.appliance, ' ', products.model) " +
+                    "FROM products WHERE products.product_id = sales.product_id) AS product, " +
+                    "(SELECT CONCAT(employees.name, ' ', employees.surname) " +
+                    "FROM employees WHERE employees.id = sales.employee_id) AS employee_name FROM sales " +
+                    "ORDER BY sale_id DESC LIMIT 1000");
+//            WHERE month > 2 AND year = 2022 LIMIT 1000
             while (rs.next()) {
                 oblist.add(new Sale(rs.getInt("sale_id"),
                         rs.getString("product"),
-                        rs.getString("customer_name"),
-                        rs.getInt("employee_id"),
-                        rs.getInt("delivery"),
+                        rs.getString("employee_name"),
+                        rs.getInt("isDelivered"),
                         rs.getInt("quantity"),
                         rs.getDouble("total_price"),
-                        rs.getString("sale_time")));
+                        rs.getString("sale_date")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -152,16 +155,17 @@ public class Sale {
         try {
             assert conn != null;
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT sales.*,(SELECT CONCAT(product.name, ' ', product.model) FROM product WHERE product.product_id = sales.product_id) AS product FROM sales WHERE employee_id = "+id);
+            ResultSet rs = stmt.executeQuery("SELECT sales.*,(SELECT CONCAT(products.appliance, ' ', products.model) FROM products" +
+                    " WHERE products.product_id = sales.product_id) AS product FROM sales WHERE employee_id = "+id+" " +
+                    "ORDER BY sale_id DESC LIMIT 1000");
             while (rs.next()) {
                 oblist.add(new Sale(rs.getInt("sale_id"),
                         rs.getString("product"),
-                        rs.getString("customer_name"),
-                        rs.getInt("employee_id"),
-                        rs.getInt("delivery"),
+                        rs.getString("employee_id"),
+                        rs.getInt("isDelivered"),
                         rs.getInt("quantity"),
                         rs.getDouble("total_price"),
-                        rs.getString("sale_time")));
+                        rs.getString("sale_date")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -176,30 +180,6 @@ public class Sale {
         return oblist;
     }
 
-
-    public static double getTotalEarningsForEmployee(int id) {
-        Connection conn = MySQL.DBConnect();
-        Statement stmt = null;
-        double total=0;
-        try {
-            stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT SUM(total_price) FROM sales WHERE employee_id = "+id);
-            if (rs.next()) {
-                total = rs.getDouble(1);
-                System.out.println(total);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return total;
-    }
     public static int getTotalQuantityForEmployee(int id) {
         Connection conn = MySQL.DBConnect();
         Statement stmt = null;
@@ -224,50 +204,4 @@ public class Sale {
         return total;
     }
 
-    public static double getTotalEarnings() {
-        Connection conn = MySQL.DBConnect();
-        Statement stmt = null;
-        double total=0;
-        try {
-            stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT SUM(total_price) FROM sales");
-            if (rs.next()) {
-                total = rs.getDouble(1);
-                System.out.println(total);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return total;
-    }
-    public static int getTotalQuantity() {
-        Connection conn = MySQL.DBConnect();
-        Statement stmt = null;
-        int total=0;
-        try {
-            stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT SUM(quantity) FROM sales");
-            if (rs.next()) {
-                total = rs.getInt(1);
-                System.out.println(total);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return total;
-    }
 }

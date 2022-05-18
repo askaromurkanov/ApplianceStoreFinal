@@ -74,7 +74,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="salesButton" contentDisplay="TOP" layoutY="32.0" prefHeight="168.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #259291; -fx-border-width: 8;" text="Button" textFill="#010b00">
+                  <JFXButton fx:id="salesButton" contentDisplay="TOP" layoutY="32.0" prefHeight="168.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #259291; -fx-border-width: 8;" text="director" textFill="#010b00">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>

@@ -20,6 +20,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class MyDeliveriesFormController {
@@ -98,12 +99,22 @@ public class MyDeliveriesFormController {
     public static ObservableList<Delivery> dataMyDeliveries(){
         ObservableList<Delivery> oblist = FXCollections.observableArrayList();
         Connection conn = MySQL.DBConnect();
+        LocalDate todayDate = LocalDate.now();
+        LocalDate yesterday = todayDate.minusDays(1);
+        String strYesterday = String.valueOf(yesterday);
+        System.out.println(strYesterday);
         try {
             assert conn != null;
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT deliveries.*,(SELECT CONCAT(product.name, ' ', product.model) FROM product WHERE product.product_id = deliveries.product_id) AS product, (SELECT orders.mail FROM orders WHERE deliveries.order_id = orders.order_id) AS mail, (SELECT orders.customer_name FROM orders WHERE deliveries.order_id = orders.order_id) AS customer_name,(SELECT orders.address FROM orders WHERE deliveries.order_id = orders.order_id) AS address, (SELECT orders.phonenumber FROM orders WHERE deliveries.order_id = orders.order_id) AS phonenumber FROM deliveries WHERE employee_id = "+authController.id);
+            ResultSet rs = stmt.executeQuery("SELECT sales.*,(SELECT CONCAT(products.appliance, ' ', products.model) " +
+                    "FROM products WHERE products.product_id = sales.product_id) AS product, (SELECT orders.mail FROM orders WHERE sales.order_id = orders.order_id) AS mail, (SELECT orders.customer_name FROM orders WHERE sales.order_id = orders.order_id) AS customer_name," +
+                    "(SELECT orders.address FROM orders WHERE sales.order_id = orders.order_id) AS address," +
+                    "(SELECT orders.phonenumber FROM orders WHERE sales.order_id = orders.order_id) AS phonenumber," +
+                    "(SELECT orders.quantity FROM orders WHERE sales.order_id = orders.order_id) AS quantity " +
+                    "FROM sales " +
+                    "WHERE sale_date = '"+strYesterday+"' AND employee_id = "+authController.id);
             while (rs.next()) {
-                oblist.add(new Delivery(rs.getInt("delivery_id"),
+                oblist.add(new Delivery(rs.getInt("sale_id"),
                         rs.getInt("order_id"),
                         rs.getInt("product_id"),
                         rs.getString("product"),
@@ -112,7 +123,7 @@ public class MyDeliveriesFormController {
                         rs.getString("mail"),
                         rs.getInt("phonenumber"),
                         rs.getInt("quantity"),
-                        rs.getString("delivery_time")));
+                        rs.getString("sale_date")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

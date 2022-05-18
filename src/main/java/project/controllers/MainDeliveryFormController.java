@@ -63,16 +63,16 @@ public class MainDeliveryFormController {
         deliveriesButton.setText(String.valueOf(getTotalWhere("quantity","sales")));
         salaryButton.setText(String.valueOf(salary(authController.id)));
 
-        String datetime = strFromTabel("MAX(sale_time)","sales","employee_id");
+        String datetime = strFromTabel("MAX(sale_date)","sales","employee_id");
         String date = "NO DELIVERIES";
         if (datetime != null){
             date = datetime.substring(0,10);
         }
         lastdateButton.setText(date);
         //lastdateButton.setText(strFromTabel("MAX(sale_time)","sales","employee_id"));
-        System.out.println(strFromTabel("MAX(sale_time)","sales","employee_id"));
+        System.out.println(strFromTabel("MAX(sale_date)","sales","employee_id"));
         ordersButton.setText(String.valueOf(getTotal("quantity","orders")));
-        positionButton.setText(strFromTabel("position","employees","id"));
+//        positionButton.setText(strFromTabel("position","employees","id"));
 
         File file = new File(Employee.getImgPath(authController.id));
         Image image = new Image(file.toURI().toString());

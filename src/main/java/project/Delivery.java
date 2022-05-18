@@ -30,7 +30,15 @@ public class Delivery extends Order{
         try {
             assert conn != null;
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT deliveryinprogress.*,(SELECT CONCAT(product.name, ' ', product.model) FROM product WHERE product.product_id = deliveryinprogress.product_id) AS product,(SELECT orders.mail FROM orders WHERE deliveryinprogress.order_id = orders.order_id) AS mail, (SELECT orders.customer_name FROM orders WHERE deliveryinprogress.order_id = orders.order_id) AS customer_name, (SELECT orders.phonenumber FROM orders WHERE deliveryinprogress.order_id = orders.order_id) AS phonenumber FROM deliveryinprogress");
+            ResultSet rs = stmt.executeQuery("SELECT deliveryinprogress.*,(SELECT CONCAT(products.appliance, ' ', products.model) " +
+                    "FROM products WHERE products.product_id = deliveryinprogress.product_id) AS product," +
+                    "(SELECT address FROM orders WHERE deliveryinprogress.order_id = orders.order_id) AS address, " +
+                    "(SELECT orders.mail FROM orders WHERE deliveryinprogress.order_id = orders.order_id) AS mail, " +
+                    "(SELECT orders.customer_name FROM orders WHERE deliveryinprogress.order_id = orders.order_id) AS customer_name," +
+                    "(SELECT orders.phonenumber FROM orders WHERE deliveryinprogress.order_id = orders.order_id) AS phonenumber, " +
+                    "(SELECT orders.quantity FROM orders WHERE deliveryinprogress.order_id = orders.order_id) AS quantity, " +
+                    "(SELECT orders.order_date FROM orders WHERE deliveryinprogress.order_id = orders.order_id) AS order_date " +
+                    "FROM deliveryinprogress");
             while (rs.next()) {
                 oblist.add(new Delivery(rs.getInt("delivery_id"),
                         rs.getInt("order_id"),
@@ -41,7 +49,7 @@ public class Delivery extends Order{
                         rs.getString("mail"),
                         rs.getInt("phonenumber"),
                         rs.getInt("quantity"),
-                        rs.getString("order_time")));
+                        rs.getString("order_date")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -18,7 +18,7 @@
             <TableColumn fx:id="id_col" prefWidth="33.600006103515625" style="-fx-alignment: center;" text="ID" />
             <TableColumn fx:id="product_col" prefWidth="144.79998397827148" style="-fx-alignment: center;" text="PRODUCT" />
             <TableColumn fx:id="client_col" prefWidth="101.5999755859375" text="CLIENT NAME" />
-            <TableColumn fx:id="employee_col" prefWidth="124.79998779296875" style="-fx-alignment: center;" text="EMPLOYEE ID" />
+            <TableColumn fx:id="employee_col" prefWidth="124.79998779296875" style="-fx-alignment: center;" text="EMPLOYEE" />
             <TableColumn fx:id="delivery_col" prefWidth="110.39996337890625" text="DELIVERY" />
             <TableColumn fx:id="quantity_col" prefWidth="93.60003662109375" text="QUANTITY" />
             <TableColumn fx:id="totalprice_col" prefWidth="117.60009765625" text="TOTAL PRICE" />
@@ -47,15 +47,5 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <Label fx:id="totalLabel" layoutX="25" layoutY="647.0" prefHeight="30.0" prefWidth="422.0" text="TOTAL EARNINGS:" textFill="#169c2d">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="totalquantityLabel" layoutX="560.0" layoutY="647.0" prefHeight="30.0" prefWidth="299.0" text="TOTAL QUANTITY SALES:" textFill="#21699c">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
    </children>
 </Pane>

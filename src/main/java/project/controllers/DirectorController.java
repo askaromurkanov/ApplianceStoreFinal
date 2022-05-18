@@ -87,6 +87,12 @@ public class DirectorController {
         new FadeIn(context).play();
     }
 
+    public void btnTopEmployees() throws IOException {
+        setPane("top-employees");
+        new FadeIn(context).play();
+
+    }
+
 
     public void btnAddProducts() throws IOException {
         setPane("AddProductsForm");
@@ -105,6 +111,15 @@ public class DirectorController {
 
     public void btnOrders() throws IOException {
         setPane("OrdersForm");
+        new FadeIn(context).play();
+    }
+
+    public void btnTopProductOrders() throws IOException {
+        setPane("report_orders");
+        new FadeIn(context).play();
+    }
+    public void btnTopProductSales() throws IOException {
+        setPane("report_sales");
         new FadeIn(context).play();
     }
     public void btnMain() throws IOException {

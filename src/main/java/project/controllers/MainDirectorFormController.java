@@ -126,7 +126,7 @@ public class MainDirectorFormController {
         salesButton.setText(String.valueOf(getTotal("quantity","sales")));
         incomeButton.setText(String.valueOf(getTotalDouble("total_price","sales")));
         ordersButton.setText(String.valueOf(getTotal("quantity","orders")));
-        productsButton.setText(String.valueOf(getTotal("quantity","product")));
+        productsButton.setText(String.valueOf(getTotal("quantity","products")));
         employeesButton.setText(String.valueOf(getCount("id","employees")));
 
         File file = new File(Employee.getImgPath(authController.id));
@@ -141,7 +141,7 @@ public class MainDirectorFormController {
         try {
             assert conn != null;
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM employees WHERE id = "+id);
+            ResultSet rs = stmt.executeQuery("SELECT *, position FROM employees JOIN positions ON employees.position_id=positions.id WHERE employees.id = "+id);
             while (rs.next()){
                 String name = rs.getString("name");
                 String surname = rs.getString("surname");

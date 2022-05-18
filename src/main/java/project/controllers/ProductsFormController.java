@@ -124,6 +124,7 @@ public class ProductsFormController {
 
     void table(){
         ObservableList<Appliance> oblist = Appliance.dataForTable();
+
         id_col.setCellValueFactory(new PropertyValueFactory<>("id"));
         name_col.setCellValueFactory(new PropertyValueFactory<>("name"));
         model_col.setCellValueFactory(new PropertyValueFactory<>("model"));
@@ -135,6 +136,7 @@ public class ProductsFormController {
         discount_col.setCellValueFactory(new PropertyValueFactory<>("discount"));
 
         tableProducts.setItems(oblist);
+        
     }
 
     void search(){

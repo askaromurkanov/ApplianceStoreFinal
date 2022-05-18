@@ -105,7 +105,6 @@ public class InProgressController {
         int recentQuantity = quantity_col.getCellData(index);
         int order_id = order_id_col.getCellData(index);
         int product_id = product_id_col.getCellData(index);
-        String client_name = customer_name.getCellData(index);
         int employee_id=authController.id;
 
         System.out.println(order_id);
@@ -123,11 +122,60 @@ public class InProgressController {
         Statement stmt = null;
         try {
             stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT price FROM product WHERE product_id = "+product_id);
+            ResultSet rs = stmt.executeQuery("SELECT price FROM products WHERE product_id = "+product_id);
             while (rs.next()) {
                 price = rs.getDouble(1);
                 System.out.println(price);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+        double total_price = price*quantity;
+
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        System.out.println(formatter.format(date));
+
+
+        String delivery_time = formatter.format(date);
+        try {
+            PreparedStatement ps;
+            String sql_insert = "INSERT INTO `deliveries`(`product_id`, `order_id`, `employee_id`, `delivery_date`) VALUES (?,?,?,?)";
+            assert conn != null;
+
+            ps = conn.prepareStatement(sql_insert);
+            ps.setInt(1, product_id);
+            ps.setInt(2, order_id);
+            ps.setInt(3,employee_id);
+            ps.setString(4, delivery_time);
+            ps.execute();
+
+            String sql = "INSERT INTO `sales`(`product_id`, `order_id`, `employee_id`, `isDelivered`, `quantity`, `total_price`, `sale_date`) VALUES (?,?,?,?,?,?,?)";
+            assert conn != null;
+
+//            INSERT INTO `sales`(`sale_id`, `product_id`, `order_id`, `customer_name`, `employee_id`, `delivery`, `quantity`, `total_price`, `sale_time`) VALUES
+
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,product_id);
+            ps.setInt(2,order_id);
+            ps.setInt(3,employee_id);
+            ps.setInt(4,delivery);
+            ps.setInt(5,quantity);
+            ps.setDouble(6,total_price);
+            ps.setString(7, delivery_time);
+            ps.execute();
+
+            String sql_delete = ("DELETE FROM `deliveryinprogress` WHERE order_id = "+order_id);
+            ps=conn.prepareStatement(sql_delete);
+            ps.execute();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("The order was successfully completed");
+            alert.showAndWait();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -137,60 +185,6 @@ public class InProgressController {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
-
-
-        double total_price = price*quantity;
-
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        System.out.println(formatter.format(date));
-
-
-        String delivery_time = formatter.format(date);
-        try {
-            PreparedStatement ps;
-            String sql_insert = "INSERT INTO `deliveries`(`product_id`, `order_id`, `employee_id`, `quantity`, `delivery_time`) VALUES (?,?,?,?,?)";
-            assert conn != null;
-
-            ps = conn.prepareStatement(sql_insert);
-            ps.setInt(1, product_id);
-            ps.setInt(2, order_id);
-            ps.setInt(3,employee_id);
-            ps.setInt(4, quantity);
-            ps.setString(5, delivery_time);
-            ps.execute();
-
-            String sql = "INSERT INTO `sales`(`product_id`, `order_id`, `customer_name`, `employee_id`, `delivery`, `quantity`, `total_price`, `sale_time`) VALUES (?,?,?,?,?,?,?,?)";
-            assert conn != null;
-
-//            INSERT INTO `sales`(`sale_id`, `product_id`, `order_id`, `customer_name`, `employee_id`, `delivery`, `quantity`, `total_price`, `sale_time`) VALUES
-
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1,product_id);
-            ps.setInt(2,order_id);
-            ps.setString(3,client_name);
-            ps.setInt(4,employee_id);
-            ps.setInt(5,delivery);
-            ps.setInt(6,quantity);
-            ps.setDouble(7,total_price);
-            ps.setString(8, delivery_time);
-            ps.execute();
-
-
-
-
-            String sql_delete = ("DELETE FROM `deliveryinprogress` WHERE product_id = "+product_id);
-            ps=conn.prepareStatement(sql_delete);
-            ps.execute();
-
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("The order was successfully completed");
-            alert.showAndWait();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         table();

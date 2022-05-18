@@ -47,11 +47,6 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <Label fx:id="totalLabel" layoutX="14.0" layoutY="647.0" prefHeight="30.0" prefWidth="460.0" text="TOTAL EARNINGS:" textFill="#169c2d">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
       <Label fx:id="totalquantityLabel" layoutX="500.0" layoutY="647.0" prefHeight="30.0" prefWidth="411.0" text="TOTAL QUANTITY SALES:" textFill="#21699c">
          <font>
             <Font name="System Bold" size="20.0" />

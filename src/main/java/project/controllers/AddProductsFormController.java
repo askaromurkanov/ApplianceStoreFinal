@@ -237,7 +237,7 @@ public class AddProductsFormController {
         Connection conn = project.MySQL.DBConnect();
         try {
             PreparedStatement ps;
-            String sql_insert = "INSERT INTO product (`name`, `model`, `factory`, `category`, `year`, `quantity`, `price`, `discount`, `description`, `image`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String sql_insert = "INSERT INTO products (`name`, `model`, `factory`, `category`, `year`, `quantity`, `price`, `discount`, `description`, `image`) VALUES (?,?,?,?,?,?,?,?,?,?)";
             assert conn != null;
 
             ps = conn.prepareStatement(sql_insert);
